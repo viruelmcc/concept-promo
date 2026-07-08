@@ -7,7 +7,12 @@
   window.__conceptLeadModal = true;
 
   var host = location.hostname;
-  var LP = /promo|gratis/i.test(host) ? "gratis" : /eletric/i.test(host) ? "eletrico" : "combustao";
+  // www/apex carregam a promo da semana grátis (LP principal) → mesmo evento da promo.
+  var LP = /eletric/i.test(host)
+    ? "eletrico"
+    : /promo|gratis|^www\.|^locadoraconcept/i.test(host)
+      ? "gratis"
+      : "combustao";
   var EVENTO =
     LP === "gratis" ? "LeadSemanaGratis" : LP === "eletrico" ? "LeadEletrico" : "LeadCombustao";
   var LEAD_ENDPOINT =
